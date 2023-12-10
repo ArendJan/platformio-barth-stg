@@ -28,7 +28,6 @@ public:
     bool prepare_to_drive_done = false;
     int prepare_to_drive_step = 0;
     decltype(millis()) prepare_to_drive_time = 0;
-
 };
 extern State state;
 extern States states;

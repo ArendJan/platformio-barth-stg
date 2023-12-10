@@ -32,4 +32,3 @@ using ReceiveCallback = void (*)(uint32_t id, uint8_t const* data, size_t size);
 void on_receive(ReceiveCallback callback);
 
 }  // namespace can
-

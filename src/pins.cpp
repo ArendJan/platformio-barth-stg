@@ -53,7 +53,7 @@ void set_bms_ready_power(bool on)
 
 bool get_bms_ready_power()
 {
-    return digitalRead(BMS_READY_POWER) == HIGH; // reading back outputs should work
+    return digitalRead(BMS_READY_POWER) == HIGH;  // reading back outputs should work
 }
 
 void set_bms_on(bool on)
@@ -63,7 +63,7 @@ void set_bms_on(bool on)
 
 bool get_bms_on()
 {
-    return digitalRead(BMS_ON) == HIGH; // reading back outputs should work
+    return digitalRead(BMS_ON) == HIGH;  // reading back outputs should work
 }
 
 void set_main_min_contactor_request(bool on)
@@ -73,7 +73,7 @@ void set_main_min_contactor_request(bool on)
 
 bool get_main_min_contactor_request()
 {
-    return digitalRead(MAIN_MIN_CONTACTOR_REQUEST) == HIGH; // reading back outputs should work
+    return digitalRead(MAIN_MIN_CONTACTOR_REQUEST) == HIGH;  // reading back outputs should work
 }
 
 void set_precharge_contactor_request(bool on)
@@ -83,5 +83,5 @@ void set_precharge_contactor_request(bool on)
 
 bool get_precharge_contactor_request()
 {
-    return digitalRead(PRECHARGE_CONTACTOR_REQUEST) == HIGH; // reading back outputs should work
+    return digitalRead(PRECHARGE_CONTACTOR_REQUEST) == HIGH;  // reading back outputs should work
 }

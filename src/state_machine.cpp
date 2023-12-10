@@ -25,7 +25,7 @@ void run_state_machine()
         case State::STARTING:
             break;
     }
-    if (updated_state) { // only reset state variables when state changes
+    if (updated_state) {  // only reset state variables when state changes
         updated_state = false;
         if (state != State::HIBERNATE) {
             states.not_hibernating();

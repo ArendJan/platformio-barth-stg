@@ -7,7 +7,7 @@ auto constexpr USER_ABORT_CHARGING = IN2;  //
 auto constexpr IGN_KL15 = IN3;             // IGNITION ON
 auto constexpr CHARGE_INTERLOCK = IN4;     // WE WANT TO CHARGE, PLUG IN SOCKET
 auto constexpr CONTACTOR_ENABLE = IN5;     // MULTIPURPOSE ENABLE ACTIVE LOW
-auto constexpr BMS_CHARGE_ENABLE = IN6;        // BMS: READY TO RECEIVE CHARGE
+auto constexpr BMS_CHARGE_ENABLE = IN6;    // BMS: READY TO RECEIVE CHARGE
 auto constexpr DISCHARGE_ENABLE = IN7;     // BMS: OK TO DRIVE
 auto constexpr STARTING = IN8;             // IGNITION 2ND CLICK, STARTER
 auto constexpr BRAKE_LIGHTS = IN9;         // BRAKE PEDAL PRESSED
@@ -26,7 +26,6 @@ void init_pins();
 
 bool ignition_on();
 bool starting_on();
-
 
 void set_bms_ready_power(bool on);
 bool get_bms_ready_power();
