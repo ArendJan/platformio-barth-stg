@@ -1,4 +1,4 @@
-#include "can.h"
+#include "can_hal.h"
 
 #include <Arduino.h>
 

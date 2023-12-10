@@ -1,0 +1,14 @@
+{
+    "cmake.configureOnOpen": true,
+    "files.associations": {
+        "*.ejs": "html",
+        "bit": "cpp",
+        "compare": "cpp",
+        "cstddef": "cpp",
+        "string": "cpp",
+        "limits": "cpp",
+        "memory": "cpp",
+        "new": "cpp",
+        "functional": "cpp"
+    }
+}
