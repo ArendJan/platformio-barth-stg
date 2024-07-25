@@ -1,6 +1,5 @@
 #include <hal/can.hpp>
 
-
 namespace {
 
 // FDCAN_HandleTypeDef hcan;

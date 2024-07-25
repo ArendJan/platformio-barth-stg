@@ -3,7 +3,8 @@
 #include <cstdint>
 #include <cstddef>
 
-// Provides a simple interface for using the CAN bus. Most of the implementation was taken from the stg-850 implementation and the code provided in https://barth-elektronik.com/downloads/9045-0038-A.zip
+// Provides a simple interface for using the CAN bus. Most of the implementation was taken from the stg-850
+// implementation and the code provided in https://barth-elektronik.com/downloads/9045-0038-A.zip
 
 namespace can {
 
@@ -18,24 +19,26 @@ enum Baudrate : int {
 
 using ReceiveCallback = void (*)(uint32_t id, uint8_t const* data, size_t size);
 
-
-class FDCAN{
-    public:
+class FDCAN {
+public:
     FDCAN_HandleTypeDef can_handle;
-    FDCAN(FDCAN_HandleTypeDef can_h): can_handle(can_h) {}
-// FDCAN_HandleTypeDef hfdcan2;
+    FDCAN(FDCAN_HandleTypeDef can_h)
+      : can_handle(can_h)
+    {
+    }
+    // FDCAN_HandleTypeDef hfdcan2;
 
-void init(Baudrate baudrate);
-void set_baudrate(Baudrate baudrate);
+    void init(Baudrate baudrate);
+    void set_baudrate(Baudrate baudrate);
 
-void send(uint32_t id, uint8_t const* data, size_t size);
+    void send(uint32_t id, uint8_t const* data, size_t size);
 
-template <size_t N>
-void send(uint32_t id, uint8_t const (&data)[N])
-{
-    send(id, data, N);
-}
+    template <size_t N>
+    void send(uint32_t id, uint8_t const (&data)[N])
+    {
+        send(id, data, N);
+    }
 
-void on_receive(ReceiveCallback callback);
+    void on_receive(ReceiveCallback callback);
 };
 }  // namespace can
