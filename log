@@ -1,0 +1,72 @@
+Processing main (platform: ststm32; framework: arduino; board: gt900)
+--------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/ststm32/gt900.html
+PLATFORM: ST STM32 (17.2.0) > GT-900
+HARDWARE: STM32G473CC 16MHz, 32KB RAM, 256KB Flash
+DEBUG: Current (stlink) On-board (stlink)
+PACKAGES: 
+ - framework-arduinoststm32 @ 4.20701.0 (2.7.1) 
+ - framework-cmsis @ 2.50900.0 (5.9.0) 
+ - toolchain-gccarmnoneeabi @ 1.120301.0 (12.3.1)
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 12 compatible libraries
+Scanning dependencies...
+No dependencies
+Building in release mode
+Compiling .pio/build/main/src/hal/can.cpp.o
+Compiling .pio/build/main/FrameworkArduino/wiring_shift.c.o
+Compiling .pio/build/main/FrameworkArduino/wiring_time.c.o
+Archiving .pio/build/main/libFrameworkArduino.a
+Indexing .pio/build/main/libFrameworkArduino.a
+In file included from src/hal/can.cpp:1:
+src/hal/can.hpp:24:5: error: 'FDCAN_HandleTypeDef' does not name a type; did you mean 'DMA_HandleTypeDef'?
+   24 |     FDCAN_HandleTypeDef can_handle;
+      |     ^~~~~~~~~~~~~~~~~~~
+      |     DMA_HandleTypeDef
+src/hal/can.hpp:25:30: error: expected ')' before 'can_h'
+   25 |     FDCAN(FDCAN_HandleTypeDef can_h): can_handle(can_h) {}
+      |          ~                   ^~~~~~
+      |                              )
+src/hal/can.hpp:40:2: error: expected ';' after class definition
+   40 | }
+      |  ^
+      |  ;
+src/hal/can.cpp:6:1: error: 'CAN_HandleTypeDef' does not name a type; did you mean 'SAI_HandleTypeDef'?
+    6 | CAN_HandleTypeDef hcan;
+      | ^~~~~~~~~~~~~~~~~
+      | SAI_HandleTypeDef
+src/hal/can.cpp:67:17: error: variable or field 'HAL_CAN_MspInit' declared void
+   67 | extern "C" void HAL_CAN_MspInit(CAN_HandleTypeDef* can)
+      |                 ^~~~~~~~~~~~~~~
+src/hal/can.cpp:67:33: error: 'CAN_HandleTypeDef' was not declared in this scope; did you mean 'SAI_HandleTypeDef'?
+   67 | extern "C" void HAL_CAN_MspInit(CAN_HandleTypeDef* can)
+      |                                 ^~~~~~~~~~~~~~~~~
+      |                                 SAI_HandleTypeDef
+src/hal/can.cpp:67:55: error: expected primary-expression before ')' token
+   67 | extern "C" void HAL_CAN_MspInit(CAN_HandleTypeDef* can)
+      |                                                       ^
+src/hal/can.cpp:91:17: error: variable or field 'HAL_CAN_MspDeInit' declared void
+   91 | extern "C" void HAL_CAN_MspDeInit(CAN_HandleTypeDef* can)
+      |                 ^~~~~~~~~~~~~~~~~
+src/hal/can.cpp:91:35: error: 'CAN_HandleTypeDef' was not declared in this scope; did you mean 'SAI_HandleTypeDef'?
+   91 | extern "C" void HAL_CAN_MspDeInit(CAN_HandleTypeDef* can)
+      |                                   ^~~~~~~~~~~~~~~~~
+      |                                   SAI_HandleTypeDef
+src/hal/can.cpp:91:57: error: expected primary-expression before ')' token
+   91 | extern "C" void HAL_CAN_MspDeInit(CAN_HandleTypeDef* can)
+      |                                                         ^
+src/hal/can.cpp:113:17: error: variable or field 'HAL_CAN_RxFifo0MsgPendingCallback' declared void
+  113 | extern "C" void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef* hcan)
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/hal/can.cpp:113:51: error: 'CAN_HandleTypeDef' was not declared in this scope; did you mean 'SAI_HandleTypeDef'?
+  113 | extern "C" void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef* hcan)
+      |                                                   ^~~~~~~~~~~~~~~~~
+      |                                                   SAI_HandleTypeDef
+src/hal/can.cpp:113:70: error: 'hcan' was not declared in this scope; did you mean 'can'?
+  113 | extern "C" void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef* hcan)
+      |                                                                      ^~~~
+      |                                                                      can
+*** [.pio/build/main/src/hal/can.cpp.o] Error 1
+========================== [FAILED] Took 1.38 seconds ==========================

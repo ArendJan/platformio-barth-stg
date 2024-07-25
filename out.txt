@@ -1,0 +1,30 @@
+********************************************************************************
+Obsolete PIO Core v6.1.13 is used (previous was 6.1.15)
+Please remove multiple PIO Cores from a system:
+https://docs.platformio.org/en/latest/core/installation/troubleshooting.html
+********************************************************************************
+Processing main (platform: ststm32; framework: arduino; board: gt900)
+--------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/ststm32/gt900.html
+PLATFORM: ST STM32 (17.2.0) > GT-900
+HARDWARE: STM32G473CC 16MHz, 32KB RAM, 256KB Flash
+DEBUG: Current (stlink) On-board (stlink)
+PACKAGES: 
+ - framework-arduinoststm32 @ 4.20701.0 (2.7.1) 
+ - framework-cmsis @ 2.50900.0 (5.9.0) 
+ - toolchain-gccarmnoneeabi @ 1.120301.0 (12.3.1)
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 12 compatible libraries
+Scanning dependencies...
+No dependencies
+Building in release mode
+Compiling .pio/build/main/FrameworkArduinoVariant/PeripheralPins.c.o
+Compiling .pio/build/main/FrameworkArduinoVariant/generic_clock.c.o
+Compiling .pio/build/main/FrameworkArduinoVariant/variant_GT900.cpp.o
+Compiling .pio/build/main/SrcWrapper/src/HAL/stm32yyxx_hal.c.o
+Compiling .pio/build/main/SrcWrapper/src/HAL/stm32yyxx_hal_adc.c.o
+Compiling .pio/build/main/SrcWrapper/src/HAL/stm32yyxx_hal_adc_ex.c.o
+Compiling .pio/build/main/SrcWrapper/src/HAL/stm32yyxx_hal_comp.c.o
+Compiling .pio/build/main/SrcWrapper/src/HAL/stm32yyxx_hal_cordic.c.o

@@ -9,6 +9,7 @@
         "limits": "cpp",
         "memory": "cpp",
         "new": "cpp",
-        "functional": "cpp"
+        "functional": "cpp",
+        "pins_arduino.h": "c"
     }
 }
