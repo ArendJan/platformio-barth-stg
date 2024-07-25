@@ -4,15 +4,20 @@
 // #include <state_machine.hpp>
 void setup()
 {
-    // init_pins();
-    // init_can();
-    // // init_state_machine();
-    pinMode(LED_BUILTIN, OUTPUT);
+
+pinMode(LED_BUILTIN, OUTPUT);
 }
+  void WriteLED_Green ( bool State )
+{
+    digitalWrite(LED_BUILTIN, State);
+}
+
 void loop()
 {
-    digitalWrite(LED_BUILTIN, HIGH);
-    delay(1000);
-    digitalWrite(LED_BUILTIN, LOW);
-    delay(1000);
+    digitalWrite(LED_BUILTIN, 1);
+          
+          
+    delay(100);
+    digitalWrite(LED_BUILTIN, 0);
+    delay(600);
 }
