@@ -21,7 +21,7 @@
 WEAK void SystemClock_Config(void)
 {
     // copied from the given project
-    RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
@@ -74,18 +74,16 @@ WEAK void SystemClock_Config(void)
   }
 
 
-
-
     /**Configure the Systick interrupt time
      */
-    HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq() / 1000);
+    // HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq() / 1000);
 
-    /**Configure the Systick
-     */
-    HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK);
+    // /**Configure the Systick
+    //  */
+    // HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK);
 
-    /* SysTick_IRQn interrupt configuration */
-    HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
+    // /* SysTick_IRQn interrupt configuration */
+    // HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
 
 
     #if false
