@@ -21,14 +21,12 @@ using ReceiveCallback = void (*)(uint32_t id, uint8_t const* data, size_t size);
 
 class FDCAN {
 public:
+    int bus_num = 0;
     FDCAN_HandleTypeDef can_handle;
-    FDCAN(FDCAN_HandleTypeDef can_h)
-      : can_handle(can_h)
-    {
-    }
+    FDCAN(FDCAN_GlobalTypeDef* can_t, Baudrate baudrate = Baudrate::Rate500k);
     // FDCAN_HandleTypeDef hfdcan2;
 
-    void init(Baudrate baudrate);
+    void init();
     void set_baudrate(Baudrate baudrate);
 
     void send(uint32_t id, uint8_t const* data, size_t size);
@@ -38,7 +36,12 @@ public:
     {
         send(id, data, N);
     }
-
+    void can_gpio_init();
+    void can_init_filter();
     void on_receive(ReceiveCallback callback);
+    void receive(FDCAN_RxHeaderTypeDef& header, uint8_t data[64]);
 };
+extern FDCAN fdcan1;
+extern FDCAN fdcan2;
 }  // namespace can
+void SendCAN_ClassicMessage(FDCAN_HandleTypeDef handle, uint32_t CANID, uint32_t DLC, const uint8_t Bytes[8]);

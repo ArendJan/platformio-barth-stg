@@ -40,3 +40,7 @@ PB_15_ALT2 = PB_15 | ALT2,
 #endif
 
 /* No USB */
+
+
+#define HAL_CAN_MODULE_ENABLED
+
