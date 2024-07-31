@@ -1,4 +1,6 @@
 #pragma once
+#include <Arduino.h>
+
 #include <stdint.h>
 
 #define LED_RT_Pin GPIO_PIN_15
@@ -31,3 +33,6 @@
 #define OneWire_SDA_GPIO_Port GPIOB
 
 extern volatile uint32_t test_v;
+
+
+void io_init();

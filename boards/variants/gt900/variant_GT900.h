@@ -12,13 +12,17 @@
  */
 #pragma once
 
-#define NUM_DIGITAL_PINS 1
+#define NUM_DIGITAL_PINS 7
 #define NUM_ANALOG_INPUTS 0
 
 // On-board LED pin number
 #ifndef LED_BUILTIN
 #define LED_BUILTIN 0
 #endif
+#if !defined  (HSE_VALUE)
+    #warning "missin hse"
+  #define HSE_VALUE    (16000000UL) /*!< Value of the External oscillator in Hz */
+#endif /* HSE_VALUE */
 
 // I2C definitions
 // #ifndef PIN_WIRE_SDA
