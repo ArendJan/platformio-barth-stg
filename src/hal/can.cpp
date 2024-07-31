@@ -154,9 +154,9 @@ void HAL_FDCAN_MspInit(FDCAN_HandleTypeDef* fdcanHandle)
         HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
         /* FDCAN1 interrupt Init */
-        HAL_NVIC_SetPriority(FDCAN1_IT0_IRQn, 0, 0);
+        HAL_NVIC_SetPriority(FDCAN1_IT0_IRQn, 1, 0);
         HAL_NVIC_EnableIRQ(FDCAN1_IT0_IRQn);
-        HAL_NVIC_SetPriority(FDCAN1_IT1_IRQn, 0, 0);
+        HAL_NVIC_SetPriority(FDCAN1_IT1_IRQn, 1, 0);
         HAL_NVIC_EnableIRQ(FDCAN1_IT1_IRQn);
         /* USER CODE BEGIN FDCAN1_MspInit 1 */
 
@@ -256,7 +256,7 @@ void HAL_FDCAN_MspDeInit(FDCAN_HandleTypeDef* fdcanHandle)
 }
 volatile uint32_t test_v = 1234;
 volatile bool x = 0;
-void HAL_FDCAN_RxFifo0Callback_test(FDCAN_HandleTypeDef* hfdcan, uint32_t RxFifo0ITs)
+extern "C" void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef* hfdcan, uint32_t RxFifo0ITs)
 {
     x = !x;
     digitalWrite(LED_BUILTIN, x);
@@ -485,4 +485,16 @@ void SendCAN_ClassicMessage(FDCAN_HandleTypeDef hfdcan, uint32_t CANID, uint32_t
         FDCAN_ErrorCountersTypeDef t;
         HAL_FDCAN_GetErrorCounters(&hfdcan, &t);
     }
+}
+
+
+void FDCAN1_RX_IRQHandler(void)
+{
+  HAL_FDCAN_IRQHandler(&can::fdcan1.can_handle);
+}
+
+
+void FDCAN2_RX_IRQHandler(void)
+{
+  HAL_FDCAN_IRQHandler(&can::fdcan2.can_handle);
 }

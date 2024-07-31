@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <hal/can.hpp>
 #include <hal/io.hpp>
+#include <hal/tim.hpp>
 void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
@@ -58,7 +59,10 @@ void SystemClock_Config(void)
 
 
 void setup()
-{  
+{  HAL_Init();
+// MX_TIM6_Init();
+//   HAL_TIM_Base_Start_IT(&htim6);
+
   SystemClock_Config();
           can::fdcan1.init();
 
@@ -81,7 +85,7 @@ void loop()
     // can::fdcan2.send(102, data, 4); // can in
 }
 
-void HAL_FDCAN_RxFifo0Callback ( FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs )
-{
-  WriteLED_Green(HIGH);
-}
+// void HAL_FDCAN_RxFifo0Callback ( FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs )
+// {
+//   WriteLED_Green(HIGH);
+// }

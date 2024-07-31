@@ -111,9 +111,9 @@ extern "C" void HAL_CAN_MspDeInit(CAN_HandleTypeDef* can)
     }
 }
 
-extern "C" void CEC_CAN_IRQHandler()
+extern "C" void CEC_FDCAN_IRQHandler()
 {
-    HAL_CAN_IRQHandler(&hcan);
+    HAL_FDCAN_IRQHandler(&hcan);
 }
 
 extern "C" void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef* hcan)
