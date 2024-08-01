@@ -12,7 +12,7 @@
     "product_line": "STM32G473xx",
     "variant": "gt900"
   },
-  "connectivity": ["can"],
+  "connectivity": ["canfd"],
   "debug": {
     "default_tools": ["stlink"],
     "jlink_device": "STM32g473CC",
