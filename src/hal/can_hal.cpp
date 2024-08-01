@@ -1,5 +1,5 @@
-#include <hal/can.hpp>
-#include <hal/io.hpp>
+#include <hal/can_hal.hpp>
+#include <hal/io_hal.hpp>
 
 // default started canbus with 500k baudrate
 FDCAN fdcan1(FDCAN1);

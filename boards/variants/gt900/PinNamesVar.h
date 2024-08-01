@@ -13,6 +13,8 @@
 // PB_15_ALT1 = PB_15 | ALT1,
 // PB_15_ALT2 = PB_15 | ALT2,
 
+
+//  @arendjan: Not sure about this
 /* SYS_WKUP */
 // #ifdef PWR_WAKEUP_PIN1
 //   SYS_WKUP1 = PA_0,

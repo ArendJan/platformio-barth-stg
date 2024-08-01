@@ -34,12 +34,6 @@
 
 #ifdef HAL_ADC_MODULE_ENABLED
 WEAK const PinMap PinMap_ADC[] = {
-    // {PA_0, ADC1, STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 0, 0)},  // ADC_IN0
-    //                               {PA_1, ADC1, STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 1, 0)},  // ADC_IN1
-    //                               {PA_2, ADC1, STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 2, 0)},  // ADC_IN2
-    //                               {PA_3, ADC1, STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 3, 0)},  // ADC_IN3
-    //                               {PA_5, ADC1, STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 5, 0)},  // ADC_IN5
-    //                               {PA_6, ADC1, STM_PIN_DATA_EXT(STM_MODE_ANALOG, GPIO_NOPULL, 0, 6, 0)},  // ADC_IN6
                                   {NC, NP, 0}};
 #endif
 
@@ -53,13 +47,11 @@ WEAK const PinMap PinMap_DAC[] = {{NC, NP, 0}};
 
 #ifdef HAL_I2C_MODULE_ENABLED
 WEAK const PinMap PinMap_I2C_SDA[] = {
-    // {PB_14, I2C2, STM_PIN_DATA(STM_MODE_AF_OD, GPIO_NOPULL, GPIO_AF5_I2C2)},
                                       {NC, NP, 0}};
 #endif
 
 #ifdef HAL_I2C_MODULE_ENABLED
 WEAK const PinMap PinMap_I2C_SCL[] = {
-    // {PB_13, I2C2, STM_PIN_DATA(STM_MODE_AF_OD, GPIO_NOPULL, GPIO_AF5_I2C2)},
                                       {NC, NP, 0}};
 #endif
 
@@ -67,7 +59,7 @@ WEAK const PinMap PinMap_I2C_SCL[] = {
 
 #ifdef HAL_TIM_MODULE_ENABLED
 WEAK const PinMap PinMap_TIM[] = {
-    {PA_15, TIM2, STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM2, 1, 0)},  // TIM2_CH1
+    // {PA_15, TIM2, STM_PIN_DATA_EXT(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF2_TIM2, 1, 0)},  // TIM2_CH1
     {NC, NP, 0}};
 #endif
 
@@ -75,15 +67,11 @@ WEAK const PinMap PinMap_TIM[] = {
 
 #ifdef HAL_UART_MODULE_ENABLED
 WEAK const PinMap PinMap_UART_TX[] = {
-    // {PA_9, USART1, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_USART1)},
-    //                                   {PB_10, USART3, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_USART3)},
                                       {NC, NP, 0}};
 #endif
 
 #ifdef HAL_UART_MODULE_ENABLED
 WEAK const PinMap PinMap_UART_RX[] = {
-    // {PA_10, USART1, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF1_USART1)},
-    //                                   {PB_11, USART3, STM_PIN_DATA(STM_MODE_AF_PP, GPIO_PULLUP, GPIO_AF4_USART3)},
                                       {NC, NP, 0}};
 #endif
 
