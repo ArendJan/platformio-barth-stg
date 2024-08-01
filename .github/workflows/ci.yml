@@ -13,10 +13,10 @@ jobs:
         uses: Trass3r/setup-cpp@master
 
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Cache Python Packages
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
@@ -24,7 +24,7 @@ jobs:
             ${{ runner.os }}-pip-
 
       - name: Cache PlatformIO Data
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ~/.platformio
           key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
@@ -56,10 +56,12 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Check Code Formatting
-        uses: DoozyX/clang-format-lint-action@v0.11
+        uses: DoozyX/clang-format-lint-action@v0.17
         with:
           source: src
           clangFormatVersion: 11
+          style: llvm
+          
