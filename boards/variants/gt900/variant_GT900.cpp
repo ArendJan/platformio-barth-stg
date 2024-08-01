@@ -15,14 +15,14 @@
 
 // Digital PinName array
 const PinName digitalPin[] = {
-    PA_0, // led green
+    PA_0,  // led green
     PC_15, // led red
     PA_12, // fdcan1 tx
     PA_11, // fdcan1 rx
-    PC_6, // can1 on
+    PC_6,  // can1 on
     PB_13, // can2 tx
     PB_14, // can2 on
-    PB_12 // can2 rx
+    PB_12  // can2 rx
 };
 
 // Analog (Ax) pin number array
