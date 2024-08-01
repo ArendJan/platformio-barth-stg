@@ -3,7 +3,8 @@
 #include "io.hpp"
 void io_init()
 {
-  // nodig voor can
+  // required for CAN!
+  // this just initializes all the GPIO pins, like in the examples
   GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */

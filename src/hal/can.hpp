@@ -5,7 +5,9 @@
 
 // Provides a simple interface for using the CAN bus. Most of the implementation was taken from the stg-850
 // implementation and the code provided in https://barth-elektronik.com/downloads/9045-0038-A.zip
- 
+
+// Modified from 👆 for the gt900
+
 
 enum Baudrate : int {
     Rate1m = 1,
@@ -20,27 +22,33 @@ using ReceiveCallback = void (*)(uint32_t id, uint8_t const* data, size_t size);
 
 class FDCAN {
 public:
-    int bus_num = 0;
     FDCAN_HandleTypeDef can_handle;
     FDCAN(FDCAN_GlobalTypeDef* can_t, Baudrate baudrate = Baudrate::Rate500k, bool auto_init = true);
-    // FDCAN_HandleTypeDef hfdcan2;
-
     void init();
     void set_baudrate(Baudrate baudrate);
 
-    void send(uint32_t id, uint8_t const* data, size_t size);
+    void send(uint32_t id, uint8_t const* data, size_t size); // only normal can for now
 
     template <size_t N>
     void send(uint32_t id, uint8_t const (&data)[N])
     {
         send(id, data, N);
     }
-    void can_gpio_init();
-    void can_init_filter();
+    // void can_gpio_init();
+    // void can_init_filter();
     void on_receive(ReceiveCallback callback);
     void receive(FDCAN_RxHeaderTypeDef& header, uint8_t data[64]);
+
     ReceiveCallback receive_callback = nullptr;
+    int bus_num = 0;
 };
+
+// just start the CAN bus, remove here and in the cpp file if not needed
 extern FDCAN fdcan1;
-extern FDCAN fdcan2; 
-void SendCAN_ClassicMessage(FDCAN_HandleTypeDef handle, uint32_t CANID, uint32_t DLC, const uint8_t Bytes[8]);
+extern FDCAN fdcan2;
+
+
+// helper functions:
+constexpr uint32_t DLC_TO_NUM(size_t DLC);
+void MX_FDCAN1_Init(FDCAN_HandleTypeDef& hfdcan1);
+void MX_FDCAN2_Init(FDCAN_HandleTypeDef& hfdcan2);

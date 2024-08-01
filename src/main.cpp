@@ -1,7 +1,6 @@
 #include <Arduino.h>
 #include <hal/can.hpp>
 #include <hal/io.hpp>
-// #include <hal/tim.hpp>
 
 auto const LED_RED = 1;  // PC_15
 
@@ -14,8 +13,8 @@ void cb(uint32_t id, uint8_t const* data, size_t size)
 void setup()
 {
     io_init();
-    // fdcan1.init();
-fdcan1.on_receive(&cb);
+    
+    fdcan1.on_receive(&cb);
     pinMode(LED_BUILTIN, OUTPUT);
     pinMode(LED_RED, OUTPUT);
 }
@@ -29,5 +28,3 @@ void loop()
     // can::fdcan2.send(102, data, 4); // can in
     digitalWrite(LED_RED, i % 2);
 }
-
-void nooit(){}
