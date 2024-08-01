@@ -1,12 +1,8 @@
 #include <hal/can.hpp>
 #include <hal/io.hpp>
-namespace can {
-
 FDCAN fdcan1(FDCAN1);
 FDCAN fdcan2(FDCAN2);
 extern "C" void HAL_CAN_MspInit(FDCAN_HandleTypeDef* can);
-// FDCAN_HandleTypeDef hcan;
-can::ReceiveCallback receive_callback = nullptr;
 void MX_FDCAN1_Init(FDCAN_HandleTypeDef& hfdcan1)
 {
     hfdcan1.Instance = FDCAN1;
@@ -57,14 +53,16 @@ void MX_FDCAN2_Init(FDCAN_HandleTypeDef& hfdcan2)
     }
 }
 
-FDCAN::FDCAN(FDCAN_GlobalTypeDef* can_t, Baudrate baudrate)
+FDCAN::FDCAN(FDCAN_GlobalTypeDef* can_t, Baudrate baudrate, bool auto_init)
 {
     if (can_t == FDCAN1) {
         this->bus_num = 1;
     } else if (can_t == FDCAN2) {
         this->bus_num = 2;
     }
-    // this->can_gpio_init();
+    if(auto_init) {
+    this->init();
+    }
 }
 
 void FDCAN::init()
@@ -115,8 +113,7 @@ void FDCAN::can_init_filter()
     //     Error_Handler();
     // }
 }
-
-}  // namespace can
+ 
 int HAL_RCC_FDCAN_CLK_ENABLED = 0;
 void HAL_FDCAN_MspInit(FDCAN_HandleTypeDef* fdcanHandle)
 {
@@ -254,31 +251,23 @@ void HAL_FDCAN_MspDeInit(FDCAN_HandleTypeDef* fdcanHandle)
         /* USER CODE END FDCAN2_MspDeInit 1 */
     }
 }
-volatile uint32_t test_v = 1234;
-volatile bool x = 0;
 extern "C" void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef* hfdcan, uint32_t RxFifo0ITs)
-{
-    x = !x;
-    digitalWrite(LED_BUILTIN, x);
-
-    FDCAN_RxHeaderTypeDef CAN_RxHeader;  // CAN header, used for reception
-    uint8_t CAN_RxData[64];              // CAN data, after the reception
-    // test_v = RxFifo0ITs;
-    if ((RxFifo0ITs & FDCAN_IT_RX_FIFO0_NEW_MESSAGE) != RESET) {
-        test_v++;
+{      FDCAN_RxHeaderTypeDef CAN_RxHeader;  // CAN header, used for reception
+    uint8_t CAN_RxData[64];              // CAN data, after the reception 
+    if ((RxFifo0ITs & FDCAN_IT_RX_FIFO0_NEW_MESSAGE) != RESET) { 
         /* Retrieve Rx messages from RX FIFO0 */
         if (HAL_FDCAN_GetRxMessage(hfdcan, FDCAN_RX_FIFO0, &CAN_RxHeader, CAN_RxData) == HAL_OK) {
-            // if (hfdcan->Instance == FDCAN1) {
-            //     can::fdcan1.receive(CAN_RxHeader, CAN_RxData);
-            // } else if (hfdcan->Instance == FDCAN2) {
-            //     can::fdcan2.receive(CAN_RxHeader, CAN_RxData);
-            // }
+            if (hfdcan->Instance == FDCAN1) {
+                fdcan1.receive(CAN_RxHeader, CAN_RxData);
+            } else if (hfdcan->Instance == FDCAN2) {
+                fdcan2.receive(CAN_RxHeader, CAN_RxData);
+            }
         } else {
             Error_Handler();
         }
     }
 }
-void HAL_FDCAN_RxFifo1Callback(FDCAN_HandleTypeDef* hfdcan, uint32_t RxFifo1ITs)
+extern "C" void HAL_FDCAN_RxFifo1Callback(FDCAN_HandleTypeDef* hfdcan, uint32_t RxFifo1ITs)
 {
     HAL_FDCAN_RxFifo0Callback(hfdcan, RxFifo1ITs);
 }
@@ -286,12 +275,11 @@ void HAL_FDCAN_RxFifo1Callback(FDCAN_HandleTypeDef* hfdcan, uint32_t RxFifo1ITs)
 /**
  * @brief This function handles FDCAN1 interrupt 0.
  */
-void FDCAN1_IT0_IRQHandler(void)
+extern "C" void FDCAN1_IT0_IRQHandler(void)
 {
     /* USER CODE BEGIN FDCAN1_IT0_IRQn 0 */
-    // test_v++;
-    /* USER CODE END FDCAN1_IT0_IRQn 0 */
-    HAL_FDCAN_IRQHandler(&can::fdcan1.can_handle);
+     /* USER CODE END FDCAN1_IT0_IRQn 0 */
+    HAL_FDCAN_IRQHandler(&fdcan1.can_handle);
     /* USER CODE BEGIN FDCAN1_IT0_IRQn 1 */
 
     /* USER CODE END FDCAN1_IT0_IRQn 1 */
@@ -300,12 +288,11 @@ void FDCAN1_IT0_IRQHandler(void)
 /**
  * @brief This function handles FDCAN1 interrupt 1.
  */
-void FDCAN1_IT1_IRQHandler(void)
+extern "C" void FDCAN1_IT1_IRQHandler(void)
 {
     /* USER CODE BEGIN FDCAN1_IT1_IRQn 0 */
-    // test_v ++;
-    /* USER CODE END FDCAN1_IT1_IRQn 0 */
-    HAL_FDCAN_IRQHandler(&can::fdcan1.can_handle);
+     /* USER CODE END FDCAN1_IT1_IRQn 0 */
+    HAL_FDCAN_IRQHandler(&fdcan1.can_handle);
     /* USER CODE BEGIN FDCAN1_IT1_IRQn 1 */
 
     /* USER CODE END FDCAN1_IT1_IRQn 1 */
@@ -314,12 +301,12 @@ void FDCAN1_IT1_IRQHandler(void)
 /**
  * @brief This function handles FDCAN2 interrupt 0.
  */
-void FDCAN2_IT0_IRQHandler(void)
+extern "C" void FDCAN2_IT0_IRQHandler(void)
 {
     /* USER CODE BEGIN FDCAN2_IT0_IRQn 0 */
 
     /* USER CODE END FDCAN2_IT0_IRQn 0 */
-    HAL_FDCAN_IRQHandler(&can::fdcan2.can_handle);
+    HAL_FDCAN_IRQHandler(&fdcan2.can_handle);
     /* USER CODE BEGIN FDCAN2_IT0_IRQn 1 */
 
     /* USER CODE END FDCAN2_IT0_IRQn 1 */
@@ -328,39 +315,17 @@ void FDCAN2_IT0_IRQHandler(void)
 /**
  * @brief This function handles FDCAN2 interrupt 1.
  */
-void FDCAN2_IT1_IRQHandler(void)
+extern "C" void FDCAN2_IT1_IRQHandler(void)
 {
     /* USER CODE BEGIN FDCAN2_IT1_IRQn 0 */
 
     /* USER CODE END FDCAN2_IT1_IRQn 0 */
-    HAL_FDCAN_IRQHandler(&can::fdcan2.can_handle);
+    HAL_FDCAN_IRQHandler(&fdcan2.can_handle);
     /* USER CODE BEGIN FDCAN2_IT1_IRQn 1 */
 
     /* USER CODE END FDCAN2_IT1_IRQn 1 */
 }
-
-// extern "C" void FDHAL_CAN_RxFifo0MsgPendingCallback(FDCAN_HandleTypeDef* hcan)
-// {
-//     // if (receive_callback == nullptr) {
-//     //     return;
-//     // }
-
-//     // CAN_RxHeaderTypeDef msg;
-//     // uint8_t data[8];
-//     // HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &msg, data);
-
-//     // uint32_t id = 0;
-//     // if (msg.IDE == CAN_ID_STD) {
-//     //     id = msg.StdId;
-//     // } else {
-//     //     id = msg.ExtId;
-//     // }
-
-//     // receive_callback(id, data, msg.DLC);
-// }
-
-namespace can {
-
+ 
 void init(Baudrate baudrate)
 {
     // can_gpio_init();
@@ -376,6 +341,17 @@ void init(Baudrate baudrate)
 
     // set_baudrate(baudrate);
 }
+void FDCAN::on_receive(ReceiveCallback callback)
+{
+    this->receive_callback = callback;
+}
+void FDCAN::receive(FDCAN_RxHeaderTypeDef& header, uint8_t data[64])
+{
+    if (this->receive_callback) {
+        this->receive_callback(header.Identifier, data, header.DataLength);
+    }
+}
+
 
 void FDCAN::set_baudrate(Baudrate baudrate)
 {
@@ -397,14 +373,11 @@ void FDCAN::set_baudrate(Baudrate baudrate)
         can_handle.Init.StdFiltersNbr = 0;
         can_handle.Init.ExtFiltersNbr = 0;
         can_handle.Init.TxFifoQueueMode = FDCAN_TX_FIFO_OPERATION;
-    }
-    // hcan.Instance->BTR &= 0xFFFFFC00;
-    // hcan.Instance->BTR |= static_cast<int>(baudrate);
+    } 
 }
 
 void FDCAN::send(uint32_t id, uint8_t const* data, size_t size)
-{
-    auto x = test_v;
+{ 
     ::SendCAN_ClassicMessage(this->can_handle, id, size, data);
     // CAN_TxHeaderTypeDef msg;
     // if (id < 2048) {
@@ -421,14 +394,7 @@ void FDCAN::send(uint32_t id, uint8_t const* data, size_t size)
     // uint32_t mailbox;
     // HAL_CAN_AddTxMessage(&hcan, &msg, const_cast<uint8_t*>(data), &mailbox);
 }
-
-void on_receive(ReceiveCallback callback)
-{
-    receive_callback = callback;
-}
-
-}  // namespace can
-
+ 
 constexpr uint32_t DLC_TO_NUM(size_t DLC)
 {
     switch (DLC) {
@@ -488,13 +454,13 @@ void SendCAN_ClassicMessage(FDCAN_HandleTypeDef hfdcan, uint32_t CANID, uint32_t
 }
 
 
-void FDCAN1_RX_IRQHandler(void)
+extern "C" void FDCAN1_RX_IRQHandler(void)
 {
-  HAL_FDCAN_IRQHandler(&can::fdcan1.can_handle);
+  HAL_FDCAN_IRQHandler(&fdcan1.can_handle);
 }
 
 
-void FDCAN2_RX_IRQHandler(void)
+extern "C" void FDCAN2_RX_IRQHandler(void)
 {
-  HAL_FDCAN_IRQHandler(&can::fdcan2.can_handle);
+  HAL_FDCAN_IRQHandler(&fdcan2.can_handle);
 }

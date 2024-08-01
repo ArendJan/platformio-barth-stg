@@ -16,6 +16,7 @@
 // Digital PinName array
 const PinName digitalPin[] = {
     PA_0, // led green
+    PC_15, // led red
     PA_12, // fdcan1 tx
     PA_11, // fdcan1 rx
     PC_6, // can1 on

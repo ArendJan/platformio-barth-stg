@@ -18,7 +18,7 @@
  * @param  None
  * @retval None
  */
-WEAK void SystemClock_Config(void)
+void SystemClock_Config(void)
 {
     // copied from the given project
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};

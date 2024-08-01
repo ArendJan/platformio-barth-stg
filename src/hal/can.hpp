@@ -5,8 +5,7 @@
 
 // Provides a simple interface for using the CAN bus. Most of the implementation was taken from the stg-850
 // implementation and the code provided in https://barth-elektronik.com/downloads/9045-0038-A.zip
-
-namespace can {
+ 
 
 enum Baudrate : int {
     Rate1m = 1,
@@ -23,7 +22,7 @@ class FDCAN {
 public:
     int bus_num = 0;
     FDCAN_HandleTypeDef can_handle;
-    FDCAN(FDCAN_GlobalTypeDef* can_t, Baudrate baudrate = Baudrate::Rate500k);
+    FDCAN(FDCAN_GlobalTypeDef* can_t, Baudrate baudrate = Baudrate::Rate500k, bool auto_init = true);
     // FDCAN_HandleTypeDef hfdcan2;
 
     void init();
@@ -40,8 +39,8 @@ public:
     void can_init_filter();
     void on_receive(ReceiveCallback callback);
     void receive(FDCAN_RxHeaderTypeDef& header, uint8_t data[64]);
+    ReceiveCallback receive_callback = nullptr;
 };
 extern FDCAN fdcan1;
-extern FDCAN fdcan2;
-}  // namespace can
+extern FDCAN fdcan2; 
 void SendCAN_ClassicMessage(FDCAN_HandleTypeDef handle, uint32_t CANID, uint32_t DLC, const uint8_t Bytes[8]);

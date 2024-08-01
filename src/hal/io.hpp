@@ -32,7 +32,4 @@
 #define OneWire_SDA_Pin GPIO_PIN_7
 #define OneWire_SDA_GPIO_Port GPIOB
 
-extern volatile uint32_t test_v;
-
-
 void io_init();

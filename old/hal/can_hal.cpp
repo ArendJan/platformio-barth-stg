@@ -10,7 +10,6 @@
 namespace {
 
 CAN_HandleTypeDef hcan;
-can::ReceiveCallback receive_callback = nullptr;
 
 void can_gpio_init()
 {
