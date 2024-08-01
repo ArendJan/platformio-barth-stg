@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include <hal/can_hal.hpp>
 #include <hal/io_hal.hpp>
 
