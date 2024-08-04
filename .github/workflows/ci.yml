@@ -67,5 +67,5 @@ jobs:
         with:
           source: src
           clangFormatVersion: 11
-          style: llvm
+          style: file
           
